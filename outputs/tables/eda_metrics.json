@@ -1,0 +1,269 @@
+{
+  "step1": {
+    "n_sessions_train": 3279,
+    "n_sessions_test": 324,
+    "total_length_train": {
+      "min": 2,
+      "Q1": 192,
+      "median": 423,
+      "mean": 850.2,
+      "std": 1212.1,
+      "P95": 2900,
+      "max": 14468
+    },
+    "total_length_test": {
+      "min": 13,
+      "Q1": 200,
+      "median": 450,
+      "mean": 818.4,
+      "std": 1001.5,
+      "P95": 2780,
+      "max": 7725
+    },
+    "n_actions_train": {
+      "min": 0,
+      "Q1": 153,
+      "median": 340,
+      "mean": 692.4,
+      "std": 1005.7,
+      "P95": 2386,
+      "max": 11977
+    },
+    "n_actions_test": {
+      "min": 9,
+      "Q1": 161,
+      "median": 365,
+      "mean": 662.3,
+      "std": 810.2,
+      "P95": 2287,
+      "max": 6203
+    },
+    "pathological": {
+      "short_lt5_train": 3,
+      "short_lt5_test": 0,
+      "zero_actions_train": 1,
+      "zero_actions_test": 0
+    }
+  },
+  "step2": {
+    "n_classes": 247,
+    "sessions_per_user": {
+      "min": 4,
+      "Q1": 7,
+      "median": 12,
+      "mean": 13.3,
+      "std": 8.8,
+      "P95": 27,
+      "max": 75
+    },
+    "imbalance_ratio": 18.8,
+    "users_rare_le5": 33,
+    "users_rare_le5_pct": 13.4,
+    "users_frequent_ge30": 10,
+    "users_frequent_ge30_pct": 4.0,
+    "gini": 0.3095
+  },
+  "step3": {
+    "browser_pct_train": {
+      "Firefox": 44.7,
+      "Google Chrome": 40.8,
+      "Microsoft Edge": 13.8,
+      "Opera": 0.7
+    },
+    "browser_pct_test": {
+      "Firefox": 45.4,
+      "Google Chrome": 41.0,
+      "Microsoft Edge": 13.0,
+      "Opera": 0.6
+    },
+    "mono_browser_users": 247,
+    "multi_browser_users": 0,
+    "fidelity_pct": 100.0,
+    "browser_exclusivity": {
+      "Firefox": {
+        "total_users": 114,
+        "exclusive_users": 114,
+        "sessions": 1466
+      },
+      "Google Chrome": {
+        "total_users": 93,
+        "exclusive_users": 93,
+        "sessions": 1339
+      },
+      "Microsoft Edge": {
+        "total_users": 39,
+        "exclusive_users": 39,
+        "sessions": 451
+      },
+      "Opera": {
+        "total_users": 1,
+        "exclusive_users": 1,
+        "sessions": 23
+      }
+    }
+  },
+  "step4": {
+    "raw_vocab_train": 7086,
+    "raw_vocab_test": 2809,
+    "raw_hapax": 1981,
+    "raw_hapax_pct": 28.0,
+    "raw_rare_le5": 4004,
+    "raw_rare_le5_pct": 56.5,
+    "raw_oov_count": 206,
+    "raw_oov_pct": 7.3,
+    "components": {
+      "Action": {
+        "vocab_train": 35,
+        "vocab_test": 35,
+        "oov_count": 0,
+        "oov_pct": 0.0
+      },
+      "(Controleur)": {
+        "vocab_train": 415,
+        "vocab_test": 216,
+        "oov_count": 8,
+        "oov_pct": 3.7
+      },
+      "<Config>": {
+        "vocab_train": 219,
+        "vocab_test": 139,
+        "oov_count": 2,
+        "oov_pct": 1.4
+      },
+      "$Domaine$": {
+        "vocab_train": 76,
+        "vocab_test": 57,
+        "oov_count": 0,
+        "oov_pct": 0.0
+      }
+    },
+    "freq_distribution": {
+      "1 fois": 1981,
+      "2-5 fois": 2023,
+      "6-50 fois": 2020,
+      ">50 fois": 1062
+    }
+  },
+  "step5": {
+    "duration_seconds": {
+      "min": 5,
+      "Q1": 185,
+      "median": 395,
+      "mean": 751.5,
+      "std": 1006.1,
+      "P95": 2590,
+      "max": 11790
+    },
+    "window_5s": {
+      "mean": 4.58,
+      "median": 3,
+      "P90": 10,
+      "max_burst": 1859
+    },
+    "immediate_repeat_rate": 18.08,
+    "top10_actions": [
+      {
+        "action": "Exécution d'un bouton",
+        "count": 510645,
+        "pct": 22.49
+      },
+      {
+        "action": "Saisie dans un champ",
+        "count": 265633,
+        "pct": 11.7
+      },
+      {
+        "action": "Sélection d'un écran",
+        "count": 206813,
+        "pct": 9.11
+      },
+      {
+        "action": "Fermeture d'une dialogue",
+        "count": 171026,
+        "pct": 7.53
+      },
+      {
+        "action": "Affichage d'une dialogue",
+        "count": 168928,
+        "pct": 7.44
+      },
+      {
+        "action": "Lancement d'une action générique",
+        "count": 115283,
+        "pct": 5.08
+      },
+      {
+        "action": "Sélection d’un onglet",
+        "count": 109209,
+        "pct": 4.81
+      },
+      {
+        "action": "Raccourci",
+        "count": 82176,
+        "pct": 3.62
+      },
+      {
+        "action": "Création d'un écran",
+        "count": 76930,
+        "pct": 3.39
+      },
+      {
+        "action": "Chainage",
+        "count": 68194,
+        "pct": 3.0
+      }
+    ],
+    "top10_bigrams": [
+      {
+        "bigram": "Saisie dans un champ -> Saisie dans un champ",
+        "count": 115028,
+        "pct": 5.07
+      },
+      {
+        "bigram": "Exécution d'un bouton -> Exécution d'un bouton",
+        "count": 92908,
+        "pct": 4.1
+      },
+      {
+        "bigram": "Saisie dans un champ -> Exécution d'un bouton",
+        "count": 89102,
+        "pct": 3.93
+      },
+      {
+        "bigram": "Exécution d'un bouton -> Fermeture d'une dialogue",
+        "count": 86031,
+        "pct": 3.79
+      },
+      {
+        "bigram": "Exécution d'un bouton -> Affichage d'une dialogue",
+        "count": 72673,
+        "pct": 3.21
+      },
+      {
+        "bigram": "Sélection d'un écran -> Sélection d'un écran",
+        "count": 65770,
+        "pct": 2.9
+      },
+      {
+        "bigram": "Affichage d'une dialogue -> Exécution d'un bouton",
+        "count": 62212,
+        "pct": 2.74
+      },
+      {
+        "bigram": "Sélection d'un écran -> Exécution d'un bouton",
+        "count": 55524,
+        "pct": 2.45
+      },
+      {
+        "bigram": "Sélection d’un onglet -> Sélection d’un onglet",
+        "count": 50293,
+        "pct": 2.22
+      },
+      {
+        "bigram": "Exécution d'un bouton -> Saisie dans un champ",
+        "count": 42697,
+        "pct": 1.88
+      }
+    ]
+  }
+}

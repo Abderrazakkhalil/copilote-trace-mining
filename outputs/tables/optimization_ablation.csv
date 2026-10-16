@@ -1,0 +1,25 @@
+Etape,Model,Masked_F1,Note
+Baseline,seq_svm,0.962,benchmark
+Baseline,ensemble_init,0.966,benchmark
+Etape1,svm_hybrid_l2_a=0.25,0.9361649375944759,1-fold
+Tuning,svm_seq_C0.5_T2.5,0.9628,
+Tuning,svm_seq_C0.5_T6.0,0.9628,
+Tuning,svm_seq_C1.0_T2.5,0.962,
+Tuning,svm_seq_C1.0_T6.0,0.962,
+Tuning,svm_seq_C2.0_T2.5,0.9622,
+Tuning,svm_seq_C2.0_T6.0,0.9622,
+Tuning,svm_hyb_C0.5_T2.5,0.9638,
+Tuning,svm_hyb_C0.5_T6.0,0.9638,
+Tuning,svm_hyb_C1.0_T2.5,0.9635,
+Tuning,svm_hyb_C1.0_T6.0,0.9635,
+Tuning,svm_hyb_C2.0_T2.5,0.9621,
+Tuning,svm_hyb_C2.0_T6.0,0.9621,
+Tuning,ridge_hyb_T2.0,0.9704,
+Tuning,ridge_hyb_T4.0,0.9704,
+Tuning,logreg_seq_C20.0,0.9284,
+Tuning,logreg_hyb_C20.0,0.9285,
+Tuning,logreg_seq_C40.0,0.9243,
+Tuning,logreg_hyb_C40.0,0.9226,
+Tuning,mlp_hyb_kbest6k,0.9536,
+Super-Ensemble,super_ensemble,0.9794,"{'svm_seq_C0.5_T2.5': 0.051, 'svm_hyb_C0.5_T2.5': 0.085, 'ridge_hyb_T2.0': 0.854, 'logreg_hyb_C20.0': 0.001, 'mlp_hyb_kbest6k': 0.009}"
+Pseudo-Labeling,pseudo_ensemble,0.9785,"{'svm_seq_C0.5_T2.5': 0.073, 'svm_hyb_C0.5_T2.5': 0.027, 'ridge_hyb_T2.0': 0.899, 'logreg_hyb_C20': 0.001}"

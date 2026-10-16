@@ -1,0 +1,10 @@
+{
+  "glued_time": {
+    "Création d'un écran(infologic.core.accueil.AccueilController)t5": 1
+  },
+  "nested_parens": {
+    "Démarrage serveur d'application Tomcat(fr.infologic.infoc.client.forms.StatSelectionPart.loadStatList (StatSelectionPart.java:514))": 7,
+    "Erreur système grave(fr.infologic.core.client.modules.inputforms.AbstractFBInputForm.save (AbstractFBInputForm.java:195))": 1
+  },
+  "no_regex_match": {}
+}
