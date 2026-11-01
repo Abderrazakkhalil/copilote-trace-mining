@@ -5,6 +5,8 @@ __pycache__/
 dist/
 build/
 .pytest_cache/
+outputs/tables/dl_hybrid_training*.log
+outputs/tables/dl_hybrid_training.pid
 
 # Virtual environments
 .venv/

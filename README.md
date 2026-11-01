@@ -113,3 +113,67 @@ python -m src.dynamic_stacking
 
 Le fichier de prédiction final est généré dans :
 `outputs/submissions/submission_dynamic_stacking.csv` (324 lignes, format `RowId,prediction`, 0 violation navigateur).
+
+## 5. ConvBiGRUAttention et fusion imbriquée
+
+Le nouveau pipeline repart des CSV bruts et réapprend les transformations dans
+chaque pli. Il ne réutilise ni les corrections manuelles ni les probabilités
+historiques pour prendre une décision. L'audit préalable et les conventions
+temporelles sont détaillés dans [dl_hybrid_audit.md](outputs/tables/dl_hybrid_audit.md).
+
+```powershell
+python -m pytest tests/ -q
+python -u -m src.dl_hybrid_pipeline --workers 1 --threads 4 --reference-0980 submission_hada_jehd.csv
+```
+
+`python -m src.conv_bigru_attention` est également un point d'entrée. Le calcul
+comporte 16 entraînements internes et 4 externes de 28 époques, plus les modèles
+classiques réentraînés dans ces mêmes sous-ensembles. Sur CPU, prévoir plusieurs
+heures. `--workers 2` à `4` parallélise les plis externes si la RAM disponible
+le permet ; un seul processus est conseillé sur une machine déjà chargée.
+
+Les caches dans `data/processed/dl_hybrid_runs/<empreinte>/` permettent de
+reprendre les sous-ensembles terminés et la dernière époque complète en
+relançant la commande **après l'arrêt du processus précédent**. Chaque fichier
+`*_training.pt` conserve poids, optimiseur, scheduler, états aléatoires, courbes
+et checkpoints sélectionnés. L'écriture est atomique à chaque fin d'époque.
+L'empreinte couvre données, sources et protocole ; elle reste identique en
+passant de CPU à GPU ou de Windows à Linux. Les versions et le matériel de
+chaque session sont conservés dans `runtime_history.jsonl`.
+
+Le paquet versionné `artifacts/dl_hybrid_transfer/` contient les probabilités
+des sept modèles classiques déjà calculées pour le premier pli interne. Elles
+sont automatiquement importées après vérification des données, du code de
+construction, des indices des plis, de l'ordre des classes et des sommes de
+contrôle. Les 23 époques de l'ancien processus arrêté n'avaient pas de checkpoint
+sur disque : le réseau recommencera ce premier entraînement à l'époque 1.
+
+**Pour reprendre depuis un autre PC avec GPU : suivre
+[docs/GPU_REPRISE.md](docs/GPU_REPRISE.md).** Le cache classique transféré est
+inclus dans Git ; les futurs checkpoints volumineux de `data/processed/` restent
+locaux et doivent être copiés lors d'un nouveau changement de machine.
+
+Les artefacts finaux sont écrits seulement une fois tous les plis terminés :
+
+- `data/processed/conv_bigru_attn_probs.pkl` : probabilités OOF `(3279, 247)`,
+  test `(324, 247)`, classes ordonnées, identifiants des plis et provenance.
+- `outputs/submissions/submission_dl_hybrid_final.csv` : 324 prédictions,
+  vérification du format, des NaN et des navigateurs.
+- `outputs/tables/dl_hybrid_report.md` et `.json` : scores, sélections internes,
+  delta avec/sans DL et intervalle bootstrap conditionnel.
+- `dl_hybrid_scores.csv`, `dl_hybrid_diversity.csv`, `dl_hybrid_concordance.csv`
+  et `dl_hybrid_arbitrations.csv` dans `outputs/tables/` : comparatifs et toutes
+  les sessions modifiées, avec probabilités Top-1/Top-2 avant/après et du réseau.
+
+La moyenne des trois meilleurs checkpoints choisis sur la validation externe
+est présentée comme diagnostic biaisé. L'évaluation stricte et la soumission
+utilisent uniquement les époques sélectionnées à l'intérieur du train externe.
+Le pipeline peut retenir un poids DL nul : une amélioration n'est pas présumée.
+Le bootstrap ne démontre pas l'absence de surapprentissage et n'intègre pas la
+variabilité de réentraînement.
+
+La référence 0,980, identifiée par l'utilisateur comme `submission_hada_jehd.csv`,
+est fournie avec `--reference-0980` et sert uniquement à la concordance finale.
+En son absence, le rapport signale cette information manquante. Une exécution avec
+`--epochs` différent de 28 ou `--batch-size` différent de 64 produit des fichiers
+`SMOKE` et des rapports séparés, sans écraser les résultats du protocole complet.

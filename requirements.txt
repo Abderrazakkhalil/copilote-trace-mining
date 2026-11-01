@@ -8,3 +8,4 @@ matplotlib
 seaborn
 tqdm
 joblib
+torch>=2.0

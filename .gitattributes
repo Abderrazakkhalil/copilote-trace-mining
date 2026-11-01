@@ -1,0 +1,3 @@
+# Preserve serialized caches/checkpoints exactly across Windows/Linux clones.
+*.pkl binary
+*.pt binary
