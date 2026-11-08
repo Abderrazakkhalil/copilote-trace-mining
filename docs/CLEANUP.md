@@ -12,7 +12,6 @@ trouve dans `_archive_local/manifest.csv` sur la machine de travail.
 | Outils génériques positionnels, profils cosinus et rééquilibrage | `src/sinkhorn.py` |
 | Tests du parseur, chemins, réseau, fusion, reprise et transferts | `tests/` |
 | Cinq figures d'analyse du rapport | `figures/` |
-| PDF fourni intact, source LaTeX disponible et illustration extraite du PDF | `report/` |
 | Sujet et indications d'origine, utilitaire d'extraction | `docs/assignment/` |
 | Benchmark, ablations, EDA, résultats neuronaux et provenance | `outputs/tables/` |
 | Trois soumissions jalons | `outputs/submissions/` |
@@ -31,6 +30,7 @@ trouve dans `_archive_local/manifest.csv` sur la machine de travail.
 | Soumissions intermédiaires, dont corrections chirurgicales | `outputs/submissions/` |
 | Journaux, audits de diagnostic et figures supplémentaires | `outputs/` |
 | Anciennes versions des fichiers réécrits | `before_cleanup/` |
+| Dossier du rapport, PDF, source LaTeX, README et illustration retirés à la demande du groupe | `report_removed/` |
 
 Le déplacement initial couvre **213 fichiers, 578 543 882 octets** (environ
 552 Mio), auxquels s'ajoutent les sauvegardes des fichiers réécrits.
@@ -49,4 +49,4 @@ Vérifications effectuées : 32 tests réussis, métriques EDA régénérées à
 l'identique, cinq figures reconstruites et matrices de 15 139 variables
 séquentielles et 246 descripteurs comportementaux sans NaN ni infini.
 Les trois soumissions respectent leurs 324 lignes et le masque navigateur ;
-les liens locaux et les empreintes du PDF et des soumissions sont contrôlés.
+les liens locaux et les empreintes des soumissions sont contrôlés.

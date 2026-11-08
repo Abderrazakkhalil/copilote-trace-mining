@@ -1,6 +1,5 @@
 {
-  "report_pdf_sha256": "eb8048c0d28e9c9ee0a541657732e7a8f90241d2f2f33e97ba327b9ecbbff440",
-  "report_source_status": "Source LaTeX locale antérieure au PDF final fourni.",
+  "report_status": "Rapport et sources retirés du dépôt à la demande du groupe ; copie conservée dans l'archive locale.",
   "imported_results_directory": "results_20261101_223919 (archivé localement)",
   "imported_run_fingerprint": "eb9c9a455191d6c62f0b04c84745bfd0f64495ea726d4e03801cae85e717a192",
   "available_original_sequence_length": 256,
@@ -29,7 +28,6 @@
     "submission_rows_each": 324,
     "submission_browser_violations_each": 0,
     "local_documentation_links_valid": true,
-    "pdf_copied_without_changes": true,
     "full_training_rerun": false
   }
 }

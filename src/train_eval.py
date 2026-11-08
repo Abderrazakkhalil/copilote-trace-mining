@@ -2,7 +2,7 @@
 
 Exécute 5 familles de modèles × 3 datasets en StratifiedKFold(4),
 applique le post-processing navigateur, optimise un Soft Voting pondéré,
-et génère les figures de benchmark pour le rapport LaTeX.
+et génère les figures de comparaison des modèles.
 
 Benchmark exploratoire : les matrices de features sont préapprises sur tout
 le train. Pour une évaluation où les transformations sont réapprises dans

@@ -2,7 +2,7 @@
 
 ## Ce que mesurent les résultats
 
-Le [rapport final fourni](../report/BE_ML_Rapport.pdf) décrit la progression
+Le rapport final du groupe décrit la progression
 publique Kaggle : **97,4 %**, puis **97,2 à 98,0 %**, enfin **98,4 %**. Ces
 valeurs proviennent du rapport et des indications du groupe ; les étiquettes
 test ne sont pas disponibles pour les recalculer localement.

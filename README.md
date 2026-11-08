@@ -1,7 +1,5 @@
 # Identification des utilisateurs de l’ERP Copilote
 
-**[Consulter / télécharger le rapport PDF complet](report/BE_ML_Rapport.pdf)**
-
 Projet de BE — **École Centrale de Lyon, MOD 7.2 : Introduction aux sciences des données**.
 À partir des traces de sessions IHM de l’ERP **Copilote (Infologic)**, nous cherchons à reconnaître **247 utilisateurs** : **3 279 sessions d’apprentissage** et **324 sessions de test**.
 
@@ -58,7 +56,6 @@ L’[export local du pipeline imbriqué](outputs/tables/dl_hybrid_report.md) mes
 
 ```text
 copilote-trace-mining/
-├── report/                 # PDF final, source LaTeX disponible et illustration
 ├── figures/                # Les cinq figures d’EDA du rapport (fig1 à fig5)
 ├── data/                   # Format attendu et empreintes des CSV
 │   ├── raw/                # train/test locaux ; modèle de soumission versionné
@@ -128,4 +125,4 @@ python -u -m src.dl_hybrid_pipeline --device cpu --workers 1 --threads 4 --max-l
 
 Ce calcul réentraîne les transformations et les modèles ; il demande **plusieurs heures sur CPU**. La soumission est écrite dans `outputs/submissions/submission_dl_hybrid_len126.csv` et les tables dans `outputs/tables/dl_hybrid_len126/`. La référence 98,0 % sert uniquement à la concordance. Pour le protocole de longueur historique, utiliser `--max-length 256` ; une exécution complète écrit `submission_dl_hybrid_final.csv`.
 
-Les détails de reprise, les limites de validation et la provenance des résultats sont dans [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md). Le [PDF final](report/BE_ML_Rapport.pdf) reste le document remis ; la source LaTeX disponible est décrite dans [report/README.md](report/README.md).
+Les détails de reprise, les limites de validation et la provenance des résultats sont dans [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md).

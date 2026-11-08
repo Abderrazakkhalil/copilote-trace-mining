@@ -35,16 +35,6 @@ data/processed/*
 *.pid
 /artifacts/
 
-# Compilation LaTeX
-/report/*.aux
-/report/*.log
-/report/*.out
-/report/*.toc
-/report/*.synctex.gz
-/report/*.fls
-/report/*.fdb_latexmk
-/report/main.pdf
-
 # OS
 .DS_Store
 Thumbs.db
