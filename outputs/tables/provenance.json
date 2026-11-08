@@ -1,0 +1,35 @@
+{
+  "report_pdf_sha256": "eb8048c0d28e9c9ee0a541657732e7a8f90241d2f2f33e97ba327b9ecbbff440",
+  "report_source_status": "Source LaTeX locale antérieure au PDF final fourni.",
+  "imported_results_directory": "results_20261101_223919 (archivé localement)",
+  "imported_run_fingerprint": "eb9c9a455191d6c62f0b04c84745bfd0f64495ea726d4e03801cae85e717a192",
+  "available_original_sequence_length": 256,
+  "sequence_length_stated_in_final_report": 126,
+  "full_training_rerun_during_cleanup": false,
+  "artifacts": {
+    "outputs/submissions/submission_dl_hybrid_final.csv": "bfca8a6e5dd37675c5816901a1900114bb71eebb9aceca7e4bc19aa8be454837",
+    "outputs/submissions/submission_ensemble_optimized.csv": "87d89edf7b3ff7292e6d002c4de0f304fbfa0c0c4fbc146936fef10fdd7f1f82",
+    "outputs/submissions/submission_hada_jehd.csv": "b9eb989a8155d5dea044ebde97a15b8934a20d9d0dacf1adf73bdebc4dfd4c88"
+  },
+  "artifacts_hash_method": "sha256_normalized_utf8",
+  "verification": {
+    "date": "2026-11-08",
+    "pytest_passed": 32,
+    "eda_metrics_identical": true,
+    "eda_figures_regenerated": 5,
+    "sequential_shape": [
+      3279,
+      15139
+    ],
+    "behavioral_shape": [
+      3279,
+      246
+    ],
+    "finite_feature_matrices": true,
+    "submission_rows_each": 324,
+    "submission_browser_violations_each": 0,
+    "local_documentation_links_valid": true,
+    "pdf_copied_without_changes": true,
+    "full_training_rerun": false
+  }
+}

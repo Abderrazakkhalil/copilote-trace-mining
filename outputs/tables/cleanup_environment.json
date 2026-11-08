@@ -1,0 +1,16 @@
+{
+  "python": "3.10.10",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.0",
+    "scipy": "1.15.3",
+    "scikit-learn": "1.7.0",
+    "xgboost": "3.2.0",
+    "matplotlib": "3.10.6",
+    "torch": "2.14.1",
+    "threadpoolctl": "3.6.0",
+    "pytest": "9.0.3"
+  },
+  "note": "Environnement de vérification du nettoyage, pas une nouvelle exécution complète."
+}

@@ -1,0 +1,282 @@
+{
+  "fingerprint": "eb9c9a455191d6c62f0b04c84745bfd0f64495ea726d4e03801cae85e717a192",
+  "epochs": 28,
+  "scores": [
+    {
+      "model": "ridge_hyb",
+      "macro_f1": 0.9691305324293729,
+      "accuracy": 0.9713327233912779
+    },
+    {
+      "model": "svm_hyb",
+      "macro_f1": 0.964059427441879,
+      "accuracy": 0.9667581579749924
+    },
+    {
+      "model": "svm_seq",
+      "macro_f1": 0.9642690511332841,
+      "accuracy": 0.9670631290027447
+    },
+    {
+      "model": "logreg_hyb",
+      "macro_f1": 0.9275502350496034,
+      "accuracy": 0.9417505336992986
+    },
+    {
+      "model": "mlp_hyb",
+      "macro_f1": 0.9569998524826101,
+      "accuracy": 0.9600487953644404
+    },
+    {
+      "model": "xgb_seq",
+      "macro_f1": 0.7223379298967236,
+      "accuracy": 0.7569380908813663
+    },
+    {
+      "model": "xgb_behav",
+      "macro_f1": 0.8310093400257788,
+      "accuracy": 0.8420250076242757
+    },
+    {
+      "model": "dl",
+      "macro_f1": 0.9379891116258074,
+      "accuracy": 0.9460201280878316
+    },
+    {
+      "model": "ensemble_without_dl",
+      "macro_f1": 0.9778513644182452,
+      "accuracy": 0.9783470570295821
+    },
+    {
+      "model": "ensemble_with_dl",
+      "macro_f1": 0.9816815829414277,
+      "accuracy": 0.9810917962793535
+    },
+    {
+      "model": "dl_outer_best3_diagnostic_BIASED",
+      "macro_f1": 0.9392420763331939,
+      "accuracy": 0.945410186032327
+    }
+  ],
+  "outer_folds": [
+    {
+      "fold": 1,
+      "chosen_epochs": [
+        23,
+        24,
+        26
+      ],
+      "without_dl": {
+        "macro_f1": 0.9856079592921699,
+        "accuracy": 0.9841463414634146
+      },
+      "with_dl": {
+        "macro_f1": 0.9895665737771001,
+        "accuracy": 0.9865853658536585
+      },
+      "selections": [
+        {
+          "weights": {
+            "ridge_hyb": 0.6,
+            "svm_hyb": 0.2,
+            "mlp_hyb": 0.15,
+            "xgb_behav": 0.05
+          },
+          "geometric": 1.0,
+          "tau": 0.3,
+          "inner_macro_f1": 0.9686429683361055
+        },
+        {
+          "weights": {
+            "ridge_hyb": 0.54,
+            "svm_hyb": 0.18000000000000002,
+            "mlp_hyb": 0.135,
+            "xgb_behav": 0.045000000000000005,
+            "dl": 0.1
+          },
+          "geometric": 1.0,
+          "tau": 0.15,
+          "inner_macro_f1": 0.9716866459458237
+        }
+      ],
+      "missing_classes_per_inner_validation": [
+        3,
+        6,
+        2,
+        4
+      ]
+    },
+    {
+      "fold": 2,
+      "chosen_epochs": [
+        18,
+        23,
+        28
+      ],
+      "without_dl": {
+        "macro_f1": 0.9745026300544859,
+        "accuracy": 0.974390243902439
+      },
+      "with_dl": {
+        "macro_f1": 0.9775683637703745,
+        "accuracy": 0.9768292682926829
+      },
+      "selections": [
+        {
+          "weights": {
+            "ridge_hyb": 0.6,
+            "svm_hyb": 0.2,
+            "mlp_hyb": 0.15,
+            "xgb_behav": 0.05
+          },
+          "geometric": 1.0,
+          "tau": 0.3,
+          "inner_macro_f1": 0.9662905047444572
+        },
+        {
+          "weights": {
+            "ridge_hyb": 0.54,
+            "svm_hyb": 0.18000000000000002,
+            "mlp_hyb": 0.135,
+            "xgb_behav": 0.045000000000000005,
+            "dl": 0.1
+          },
+          "geometric": 1.0,
+          "tau": 0.3,
+          "inner_macro_f1": 0.9686136002652969
+        }
+      ],
+      "missing_classes_per_inner_validation": [
+        3,
+        1,
+        3,
+        6
+      ]
+    },
+    {
+      "fold": 3,
+      "chosen_epochs": [
+        22,
+        25,
+        27
+      ],
+      "without_dl": {
+        "macro_f1": 0.9677706872997732,
+        "accuracy": 0.973170731707317
+      },
+      "with_dl": {
+        "macro_f1": 0.9727762156078423,
+        "accuracy": 0.9768292682926829
+      },
+      "selections": [
+        {
+          "weights": {
+            "ridge_hyb": 0.6,
+            "svm_hyb": 0.2,
+            "mlp_hyb": 0.15,
+            "xgb_behav": 0.05
+          },
+          "geometric": 1.0,
+          "tau": 0.3,
+          "inner_macro_f1": 0.9760804981164072
+        },
+        {
+          "weights": {
+            "ridge_hyb": 0.54,
+            "svm_hyb": 0.18000000000000002,
+            "mlp_hyb": 0.135,
+            "xgb_behav": 0.045000000000000005,
+            "dl": 0.1
+          },
+          "geometric": 1.0,
+          "tau": 0.3,
+          "inner_macro_f1": 0.9804170044559806
+        }
+      ],
+      "missing_classes_per_inner_validation": [
+        4,
+        9,
+        3,
+        7
+      ]
+    },
+    {
+      "fold": 4,
+      "chosen_epochs": [
+        20,
+        24,
+        25
+      ],
+      "without_dl": {
+        "macro_f1": 0.9818486546397953,
+        "accuracy": 0.9816849816849816
+      },
+      "with_dl": {
+        "macro_f1": 0.9861510773632708,
+        "accuracy": 0.9841269841269841
+      },
+      "selections": [
+        {
+          "weights": {
+            "ridge_hyb": 0.6,
+            "svm_hyb": 0.2,
+            "mlp_hyb": 0.15,
+            "xgb_behav": 0.05
+          },
+          "geometric": 1.0,
+          "tau": 0.15,
+          "inner_macro_f1": 0.9693822397873274
+        },
+        {
+          "weights": {
+            "ridge_hyb": 0.54,
+            "svm_hyb": 0.18000000000000002,
+            "mlp_hyb": 0.135,
+            "xgb_behav": 0.045000000000000005,
+            "dl": 0.1
+          },
+          "geometric": 1.0,
+          "tau": 0.0,
+          "inner_macro_f1": 0.9725034903377588
+        }
+      ],
+      "missing_classes_per_inner_validation": [
+        4,
+        2,
+        1,
+        5
+      ]
+    }
+  ],
+  "delta_macro_f1": 0.003830218523182549,
+  "paired_class_stratified_bootstrap_95_ci": [
+    0.0014013799983688985,
+    0.006443577839845351
+  ],
+  "unique_test_classes": 226,
+  "browser_violations": 0,
+  "n_arbitrations": 2,
+  "reference_files": {
+    "reference_0.974": {
+      "file": "submission_ensemble_optimized.csv",
+      "sha256": "72d3a8acdbfdf1fa2f06d7cbad43ea2e4d61ac0878f81b4bb37b3fdf4e1d43c2"
+    },
+    "historical_dynamic_stacking": {
+      "file": "submission_dynamic_stacking.csv",
+      "sha256": "7bb9c804f83e57196e84a4a6c8ed2de701ba32770a67675b119d12a8b7d1830f"
+    },
+    "reference_0.980": {
+      "file": "submission_hada_jehd.csv",
+      "sha256": "87ea69eefc13c7a6d188403b3cf8354f06bf375885fb4c886a77ad71d8cffe62"
+    }
+  },
+  "reference_0.980_status": "File explicitly supplied by user.",
+  "conclusion": "Positive OOF gain with conditional bootstrap interval above zero; independent replication still required.",
+  "limitations": [
+    "Four fixed outer folds; no claim of proving absence of overfitting.",
+    "Bootstrap conditional on fitted OOF predictions; it does not include training variability.",
+    "Inner 4-fold validation has missing rare-class support (minimum outer-train count=3).",
+    "Best-three checkpoints chosen on outer labels are reported ONLY as a biased diagnostic.",
+    "0.974/0.980 reference submissions are comparison artifacts, never training inputs."
+  ]
+}
