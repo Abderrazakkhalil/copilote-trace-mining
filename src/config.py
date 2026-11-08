@@ -19,7 +19,8 @@ TEST_CSV  = RAW_DIR / "test.csv"
 
 # ── Outputs ─────────────────────────────────────────────────────────────
 OUTPUTS_DIR      = PROJECT_ROOT / "outputs"
-FIGURES_DIR      = OUTPUTS_DIR / "figures"
+FIGURES_DIR      = PROJECT_ROOT / "figures"
+MODEL_FIGURES_DIR = OUTPUTS_DIR / "figures"
 TABLES_DIR       = OUTPUTS_DIR / "tables"
 SUBMISSIONS_DIR  = OUTPUTS_DIR / "submissions"
 
@@ -28,5 +29,5 @@ RANDOM_STATE = 42
 N_SPLITS     = 4          # stratified k-fold
 
 # ── Auto-create directories ────────────────────────────────────────────
-for _d in (RAW_DIR, PROCESSED_DIR, FIGURES_DIR, TABLES_DIR, SUBMISSIONS_DIR):
+for _d in (RAW_DIR, PROCESSED_DIR, FIGURES_DIR, MODEL_FIGURES_DIR, TABLES_DIR, SUBMISSIONS_DIR):
     _d.mkdir(parents=True, exist_ok=True)

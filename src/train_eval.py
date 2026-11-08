@@ -4,6 +4,10 @@ Exécute 5 familles de modèles × 3 datasets en StratifiedKFold(4),
 applique le post-processing navigateur, optimise un Soft Voting pondéré,
 et génère les figures de benchmark pour le rapport LaTeX.
 
+Benchmark exploratoire : les matrices de features sont préapprises sur tout
+le train. Pour une évaluation où les transformations sont réapprises dans
+chaque pli, utiliser src.dl_hybrid_pipeline.
+
 Usage
 -----
     python -m src.train_eval
@@ -46,7 +50,7 @@ from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 
 from src.config import (
-    PROCESSED_DIR, FIGURES_DIR, TABLES_DIR, SUBMISSIONS_DIR,
+    PROCESSED_DIR, MODEL_FIGURES_DIR as FIGURES_DIR, TABLES_DIR, SUBMISSIONS_DIR,
     RANDOM_STATE, N_SPLITS,
 )
 from src.postprocess import apply_browser_mask, decision_to_proba

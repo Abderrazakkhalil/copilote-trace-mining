@@ -26,7 +26,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import LabelEncoder, StandardScaler, normalize
 from sklearn.svm import LinearSVC
-from src.config import PROCESSED_DIR, FIGURES_DIR, TABLES_DIR, SUBMISSIONS_DIR, RANDOM_STATE, N_SPLITS
+from src.config import PROCESSED_DIR, MODEL_FIGURES_DIR as FIGURES_DIR, TABLES_DIR, SUBMISSIONS_DIR, RANDOM_STATE, N_SPLITS
 from src.postprocess import apply_browser_mask, decision_to_proba
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":

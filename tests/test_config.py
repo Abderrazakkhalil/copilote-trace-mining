@@ -19,9 +19,11 @@ def test_paths_exist():
     assert TABLES_DIR.exists()
 
 
-def test_dataset_files_exist():
-    assert TRAIN_CSV.exists()
-    assert TEST_CSV.exists()
+def test_dataset_paths_are_independent_of_working_directory(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    assert TRAIN_CSV == PROJECT_ROOT / "data" / "raw" / "train.csv"
+    assert TEST_CSV == PROJECT_ROOT / "data" / "raw" / "test.csv"
+    assert FIGURES_DIR == PROJECT_ROOT / "figures"
 
 
 def test_constants():
