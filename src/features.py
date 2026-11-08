@@ -12,7 +12,10 @@ Datasets produits dans ``data/processed/`` :
 3. **Hybrid_Combined** (``X_train_hybrid.pkl``, ``X_test_hybrid.pkl``)
    Concaténation horizontale du Dense standardisé + Sparse.
 
-Toutes les transformations sont **fit sur train uniquement** (zéro leakage).
+Les constructeurs ajustent leurs transformations sur les sessions reçues en
+premier argument. Le point d'entrée historique les ajuste sur tout le train
+pour le benchmark exploratoire ; src.dl_hybrid_pipeline les réapprend dans
+chaque pli pour l'évaluation imbriquée. Markov et RLE sont dans le bloc dense.
 """
 
 from __future__ import annotations

@@ -79,8 +79,8 @@ class SequencePreprocessor:
     Statistics use full original sessions, before deterministic truncation.
     """
     def __init__(self, max_len: int = 256):
-        if max_len != 256:
-            raise ValueError("The fixed protocol requires max_len=256")
+        if not isinstance(max_len, int) or isinstance(max_len, bool) or max_len < 2:
+            raise ValueError("max_len must be an integer >= 2")
         self.max_len = max_len
 
     def fit(self, traces: list[Trace]):
@@ -101,18 +101,20 @@ class SequencePreprocessor:
 
     def transform(self, traces: list[Trace]) -> tuple[np.ndarray, ...]:
         n = len(traces)
-        tokens = np.zeros((n, 256), np.int64)
+        tokens = np.zeros((n, self.max_len), np.int64)
         ctrls = np.zeros_like(tokens)
-        tempo = np.zeros((n, 256, 2), np.float32)
-        pos = np.zeros((n, 256, 4), np.float32)
+        tempo = np.zeros((n, self.max_len, 2), np.float32)
+        pos = np.zeros((n, self.max_len, 4), np.float32)
+        head = self.max_len // 2
+        tail = self.max_len - head
         for row, s in enumerate(traces):
             length = len(s.tokens)
             if not length:
                 # A synthetic unknown step gives empty sessions a finite representation.
                 tokens[row, 0] = ctrls[row, 0] = 1
                 continue
-            indices = (np.r_[np.arange(128), np.arange(length - 128, length)]
-                       if length > 256 else np.arange(length))
+            indices = (np.r_[np.arange(head), np.arange(length - tail, length)]
+                       if length > self.max_len else np.arange(length))
             for j, original in enumerate(indices):
                 ctrl = s.controllers[original]
                 tokens[row, j] = self.token_vocab.get(s.tokens[original], 1)
@@ -123,7 +125,7 @@ class SequencePreprocessor:
                                  np.clip((log_dt - median) / std, -5, 5))
                 pos[row, j] = (original / length, np.log1p(original) / 8,
                                np.log1p(length - original) / 8,
-                               float(length > 256 and j == 128))
+                               float(length > self.max_len and j == head))
         return tokens, ctrls, tempo, pos
 
 

@@ -1,10 +1,12 @@
-# Classical training/test environment used for the transferred cache.
-# Install a CUDA-enabled torch build separately using the official PyTorch selector.
+# Environnement local vérifié ; Python 3.10.10. Pour une installation portable,
+# utiliser requirements-dev.txt. Une version publiée de torch compatible
+# avec la machine peut remplacer ce build local.
 numpy==2.2.6
 pandas==2.3.0
 scipy==1.15.3
 scikit-learn==1.7.0
 xgboost==3.2.0
-joblib==1.5.1
+matplotlib==3.10.6
+torch==2.14.1
 threadpoolctl==3.6.0
 pytest==9.0.3

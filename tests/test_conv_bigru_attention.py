@@ -39,6 +39,18 @@ def test_unseen_events_and_stats_do_not_enter_training_preprocessor():
     assert not tempo[0, 4:].any()
 
 
+def test_report_window_retains_63_head_and_63_tail_events():
+    s = trace(300)
+    s.deltas = np.arange(300, dtype=np.float32)
+    prep = SequencePreprocessor(max_len=126).fit([s])
+    tokens, ctrls, tempo, pos = prep.transform([s])
+    indices = np.r_[np.arange(63), np.arange(237, 300)]
+    assert tokens.shape == ctrls.shape == (1, 126)
+    np.testing.assert_allclose(pos[0, :, 0], indices / 300, atol=1e-7)
+    assert np.flatnonzero(pos[0, :, 3]).tolist() == [63]
+    assert np.isclose(tempo[0, 63, 0], (np.log1p(237) - prep.mean) / prep.std)
+
+
 def test_parser_alignment_glued_markers_and_censored_tail(tmp_path):
     path = tmp_path / "trace.csv"
     path.write_text("u,Firefox,Click(C)<screen>,Type(C)t6,t10,Exit(D)\n", encoding="utf-8")

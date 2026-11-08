@@ -1,0 +1,17 @@
+{
+  "format_version": 1,
+  "files": {
+    "train.csv": {
+      "lines": 3279,
+      "sha256_normalized_utf8": "b1d32fed43795dd081add8ebac0c73211d719b58d66bb05d43e445e9a6491649"
+    },
+    "test.csv": {
+      "lines": 324,
+      "sha256_normalized_utf8": "a6d8728583924e65012ef70d1dc7f6e03f6a24d2453d12845e7aed30519cbece"
+    },
+    "sample_submission.csv": {
+      "lines": 325,
+      "sha256_normalized_utf8": "7d482ae4f1ebe02e40986c96c2df43313184a32668781cc3a66760629062f1bd"
+    }
+  }
+}

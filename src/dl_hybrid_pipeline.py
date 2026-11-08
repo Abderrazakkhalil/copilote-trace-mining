@@ -47,8 +47,7 @@ from src.parser import load_dataset
 from src.postprocess import apply_browser_mask
 
 MODEL_NAMES = ("ridge_hyb", "svm_hyb", "svm_seq", "logreg_hyb", "mlp_hyb", "xgb_seq", "xgb_behav")
-REFERENCE_FILES = {"reference_0.974": "submission_ensemble_optimized.csv",
-                   "historical_dynamic_stacking": "submission_dynamic_stacking.csv"}
+REFERENCE_FILES = {"reference_0.974": "submission_ensemble_optimized.csv"}
 
 
 def dump(obj, path):
@@ -222,7 +221,7 @@ def evaluate_subset(train_idx, eval_idx, train_sessions, test_sessions, traces, 
     else:
         probabilities = classical_predictions(features, y[train_idx], len(classes), threads=args.threads)
         dump(probabilities, classical_path)
-    preprocessing = SequencePreprocessor().fit(raw_train)
+    preprocessing = SequencePreprocessor(max_len=getattr(args, "max_length", 256)).fit(raw_train)
     train_arrays = (*preprocessing.transform(raw_train), features[2])
     eval_arrays = (*preprocessing.transform(raw_eval), features[3])
     nval = len(eval_idx)
@@ -272,9 +271,19 @@ def bootstrap_delta(y, before, after, n_classes, iterations=2000):
     return np.percentile(estimates, [2.5, 97.5]).tolist()
 
 
+def artifact_variant(args):
+    """Isolate changes to sequence length and smoke runs from imported results."""
+    length = getattr(args, "max_length", 256)
+    suffix = "" if length == 256 else f"_len{length}"
+    if args.epochs != 28 or args.batch_size != 64:
+        suffix = "_SMOKE_ONLY" + suffix
+    return suffix
+
+
 def write_report(y, classes, train_sessions, test_sessions, oof, test_probs, before, after,
                  before_test, after_test, diagnostics, fold_records, fingerprint, args):
-    report_dir = TABLES_DIR if args.epochs == 28 and args.batch_size == 64 else TABLES_DIR / "dl_hybrid_smoke"
+    variant = artifact_variant(args)
+    report_dir = TABLES_DIR / f"dl_hybrid{variant}" if variant else TABLES_DIR
     report_dir.mkdir(parents=True, exist_ok=True)
     n_classes = len(classes)
     rows = [{"model": name, **metrics(y, p, n_classes)} for name, p in oof.items()]
@@ -303,8 +312,8 @@ def write_report(y, classes, train_sessions, test_sessions, oof, test_probs, bef
     violations = sum(mapping[p] != s["browser"] for p, s in zip(final, test_sessions))
     if len(submission) != 324 or submission.isna().any().any() or violations:
         raise ValueError("Submission shape, NaN or browser invariant failed")
-    if args.epochs != 28 or args.batch_size != 64:
-        submission_path = SUBMISSIONS_DIR / "submission_dl_hybrid_SMOKE_ONLY.csv"
+    if variant:
+        submission_path = SUBMISSIONS_DIR / f"submission_dl_hybrid{variant}.csv"
     else:
         submission_path = SUBMISSIONS_DIR / "submission_dl_hybrid_final.csv"
     submission.to_csv(submission_path, index=False)
@@ -340,7 +349,8 @@ def write_report(y, classes, train_sessions, test_sessions, oof, test_probs, bef
     pd.DataFrame(arbitrations, columns=columns).to_csv(report_dir / "dl_hybrid_arbitrations.csv", index=False)
     interval = bootstrap_delta(y, before.argmax(1), after.argmax(1), n_classes)
     delta = metrics(y, after, n_classes)["macro_f1"] - metrics(y, before, n_classes)["macro_f1"]
-    report = {"fingerprint": fingerprint, "epochs": args.epochs, "scores": rows, "outer_folds": fold_records,
+    report = {"fingerprint": fingerprint, "epochs": args.epochs,
+              "max_length": getattr(args, "max_length", 256), "scores": rows, "outer_folds": fold_records,
               "delta_macro_f1": delta, "paired_class_stratified_bootstrap_95_ci": interval,
               "unique_test_classes": len(set(final)), "browser_violations": violations,
               "n_arbitrations": len(arbitrations), "reference_files": references,
@@ -421,6 +431,8 @@ def main():
     parser.add_argument("--threads", type=int, default=2)
     parser.add_argument("--epochs", type=int, default=28, help="Other values produce separately named SMOKE artifacts only")
     parser.add_argument("--batch-size", type=int, default=64)
+    parser.add_argument("--max-length", type=int, default=256,
+                        help="126 matches the report constraint; 256 preserves the available run protocol")
     parser.add_argument("--reference-0980", help="Exact reference filename, when identified; comparison only")
     parser.add_argument("--transfer-dir", type=Path,
                         default=PROJECT_ROOT / "artifacts/dl_hybrid_transfer",
@@ -428,8 +440,8 @@ def main():
     parser.add_argument("--check-transfer", action="store_true",
                         help="Validate/import the bundle and exit without training")
     args = parser.parse_args()
-    if not 1 <= args.workers <= 4 or args.epochs < 1 or args.batch_size < 2 or args.threads < 1:
-        parser.error("workers must be 1..4; epochs/threads positive; batch-size >= 2")
+    if not 1 <= args.workers <= 4 or args.epochs < 1 or args.batch_size < 2 or args.threads < 1 or args.max_length < 2:
+        parser.error("workers must be 1..4; epochs/threads positive; batch-size and max-length >= 2")
     if args.device.startswith("cuda") and not torch.cuda.is_available():
         parser.error("CUDA unavailable: install a CUDA-enabled PyTorch build on a supported GPU PC")
     if args.device.startswith("cuda") and args.workers != 1:
@@ -443,7 +455,8 @@ def main():
                     Path(__file__).with_name("postprocess.py"), Path(__file__).with_name("config.py"),
                     Path(__file__).with_name("dl_hybrid_transfer.py")]
     protocol = {"files": {p.name: portable_file_hash(p) for p in [TRAIN_CSV, TEST_CSV, *source_files]},
-                "epochs": args.epochs, "batch_size": args.batch_size, "seed": 42, "format_version": 2}
+                "epochs": args.epochs, "batch_size": args.batch_size,
+                "max_length": args.max_length, "seed": 42, "format_version": 3}
     runtime = {"device": args.device, "threads": args.threads, "workers": args.workers,
                "torch": str(torch.__version__), "sklearn": sklearn.__version__,
                "numpy": np.__version__, "xgboost": xgboost.__version__,
@@ -510,7 +523,7 @@ def main():
               "fold_ids": split_ids, "fingerprint": fingerprint, "manifest": manifest,
               "outer_best3_diagnostic_probs": diagnostics,
               "selection_protocol": "outer epochs chosen on inner folds only; outer-best diagnostic excluded from fusion"}
-    filename = "conv_bigru_attn_probs.pkl" if args.epochs == 28 and args.batch_size == 64 else "conv_bigru_attn_SMOKE_probs.pkl"
+    filename = f"conv_bigru_attn{artifact_variant(args)}_probs.pkl"
     dump(result, PROCESSED_DIR / filename)
     dump({"oof": oof, "test": test_probs, "before_oof": before, "after_oof": after,
           "before_test": before_test, "after_test": after_test, "folds": fold_records,

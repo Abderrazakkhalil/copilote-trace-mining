@@ -1,11 +1,9 @@
+# Python >= 3.10 ; dépendances utilisées par src/.
 numpy
 pandas
 scipy
-scikit-learn
+scikit-learn>=1.2
 xgboost
-lightgbm
 matplotlib
-seaborn
-tqdm
-joblib
 torch>=2.0
+threadpoolctl

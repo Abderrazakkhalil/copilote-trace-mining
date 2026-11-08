@@ -56,3 +56,12 @@ def test_submission_reference_alignment_and_arbitration_export(tmp_path, monkeyp
 def test_paired_bootstrap_of_identical_predictions_is_zero():
     y = np.repeat(np.arange(3), 4)
     np.testing.assert_array_equal(pipeline.bootstrap_delta(y, y, y, 3, iterations=30), [0., 0.])
+
+
+def test_changed_window_and_smoke_artifacts_cannot_overwrite_historical_results():
+    args = SimpleNamespace(epochs=28, batch_size=64, max_length=126)
+    assert pipeline.artifact_variant(args) == '_len126'
+    args.epochs = 1
+    assert pipeline.artifact_variant(args) == '_SMOKE_ONLY_len126'
+    args.max_length = 256
+    assert pipeline.artifact_variant(args) == '_SMOKE_ONLY'
