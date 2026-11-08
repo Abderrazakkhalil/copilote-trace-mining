@@ -1,3 +1,14 @@
 # Preserve serialized caches/checkpoints exactly across Windows/Linux clones.
 *.pkl binary
 *.pt binary
+*.pdf binary
+*.png binary
+
+# Sources identiques entre Windows et Linux.
+.gitattributes text eol=lf
+.gitignore text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.tex text eol=lf
+*.txt text eol=lf
+*.json text eol=lf

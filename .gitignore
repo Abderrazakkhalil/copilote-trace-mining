@@ -1,3 +1,6 @@
+# Archives conservées uniquement sur cette machine
+/_archive_local/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -16,9 +19,31 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# Data (processed only – raw is tracked)
+# Données locales : obtenir les CSV auprès de la source autorisée
+/data/raw/train.csv
+/data/raw/test.csv
 data/processed/*
 !data/processed/.gitkeep
+
+# Caches, poids et journaux générés
+*.pkl
+*.npy
+*.npz
+*.pt
+*.pth
+*.log
+*.pid
+/artifacts/
+
+# Compilation LaTeX
+/report/*.aux
+/report/*.log
+/report/*.out
+/report/*.toc
+/report/*.synctex.gz
+/report/*.fls
+/report/*.fdb_latexmk
+/report/main.pdf
 
 # OS
 .DS_Store

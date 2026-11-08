@@ -1,7 +1,0 @@
-RowId,Browser,v1,v2,v3,Ridge_Top1,Ridge_Top2,Ridge_Margin,Nested_Blend_Prediction,Nested_Blend_Top2
-15,Firefox,txk,eoe,eoe,eoe,txk,0.0007,eoe,txk
-116,Firefox,cpn,zht,zht,zht,nuh,0.0001,zht,nuh
-118,Firefox,khv,tmn,tmn,tmn,khv,0.0001,tmn,khv
-272,Google Chrome,guh,hvh,hvh,hvh,azx,0.0005,hvh,guh
-298,Microsoft Edge,crn,rmf,rmf,rmf,crn,0.0004,crn,rmf
-311,Google Chrome,skm,slq,skm,skm,slq,0.0004,skm,slq
